@@ -1,5 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import ImageInputComponent from './ImageInput';
+import ImageInput from './ImageInput';
 import ResponseComponent from './Response';
 import styles from '../Styles/Interface.module.css';
 import axios from 'axios';
@@ -89,10 +89,7 @@ function Interface() {
             </div>
           </div>
         </div>
-        <ImageInputComponent
-          imageFile={imageFile}
-          handleImageChange={handleImageChange}
-        />
+        <ImageInput handleImageChange={handleImageChange} />
       </form>
       {/* Response component with loading indicator */}
       <div id={styles.response} className={`top-12`}>

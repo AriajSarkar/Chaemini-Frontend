@@ -7,7 +7,7 @@ interface ImageInputProps {
   handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ImageInput: React.FC<ImageInputProps> = ({ imageFile, handleImageChange }) => {
+const ImageInput: React.FC<Omit<ImageInputProps, 'imageFile'>> = ({ handleImageChange }) => {
   return (
     <input
       id={styles.imageInput}
@@ -21,7 +21,6 @@ const ImageInput: React.FC<ImageInputProps> = ({ imageFile, handleImageChange })
 };
 
 ImageInput.propTypes = {
-  imageFile: PropTypes.instanceOf(File),
   handleImageChange: PropTypes.func.isRequired,
 };
 
