@@ -1,10 +1,21 @@
-const Response = ({ response }: { response: string }) => {
-    return (
-      <div className="flex flex-col gap-2">
-        <h2>Response:</h2>
-        <p>{response}</p>
-      </div>
-    );
-  };
+interface ResponseProps {
+  response: string;
+  loading: boolean;
+}
 
-  export default Response;
+const ResponseComponent: React.FC<ResponseProps> = ({ response, loading }) => {
+  return (
+    <div className="flex flex-col gap-2">
+      <h2 className="text-lg font-semibold">Response:</h2>
+      {loading ? (
+        <div className="flex items-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-400 mr-3"></div> {/* Loading spinner */}
+        </div>
+      ) : (
+        <p>{response}</p> // Display response if loading is false
+      )}
+    </div>
+  );
+};
+
+export default ResponseComponent;

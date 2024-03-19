@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dotenv from 'dotenv'
 
-// https://vitejs.dev/config/
+dotenv.config()
+
+// Get the proxy URL from the environment variables
+const proxyUrl: string | undefined = process.env.PROXY_URL
+
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api/g/': 'http://127.0.0.1:5000/',
+      '/api/v1/g/': {
+        target: proxyUrl || undefined, // Use undefined if proxyUrl is undefined
+        changeOrigin: true,
+        // Add any other proxy options here if needed
+      }
     }
   }
 })
