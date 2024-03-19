@@ -11,6 +11,7 @@
     "moduleResolution": "Node",
     "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
