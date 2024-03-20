@@ -1,8 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 import ImageInput from './ImageInput';
-import ResponseComponent from './Response';
+import Response from './Response';
 import styles from '../Styles/Interface.module.css';
 import axios from 'axios';
+
+const apiUrl =  import.meta.env.VITE_PROXY_URL;
 
 function Interface() {
   const [prompt, setPrompt] = useState('');
@@ -20,7 +22,7 @@ function Interface() {
         const formData = new FormData();
         formData.append('user_image', imageFile);
 
-        const res = await axios.post('/api/v1/g/generate-vision', formData);
+        const res = await axios.post(`${apiUrl}/api/v1/g/generate-vision`, formData);
         if (!res.data || res.data.response.trim() === '') {
           setResponse('Please provide more details of what you need.');
         } else {
@@ -37,7 +39,7 @@ function Interface() {
           return;
         }
 
-        const res = await axios.post('/api/v1/g/generate-text', { prompt });
+        const res = await axios.post(`${apiUrl}/api/v1/g/generate-text`, { prompt });
         if (!res.data || res.data.text.trim() === '') {
           setResponse('Please provide more details of what you need.');
         } else {
@@ -93,7 +95,7 @@ function Interface() {
       </form>
       {/* Response component with loading indicator */}
       <div id={styles.response} className={`top-12`}>
-        <ResponseComponent response={response} loading={loading} /> {/* Pass loading prop */}
+        <Response response={response} loading={loading} /> {/* Pass loading prop */}
       </div>
     </div>
   );
