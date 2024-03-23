@@ -1,4 +1,4 @@
-import Interface from './components/Ui/Interface';
+import Interface from './components/Ui/Interface/Interface';
 
 const App: React.FC = () => {
   return (
