@@ -3,8 +3,6 @@ import ImageInput from '../ImageInput/ImageInput';
 import Response from '../Response/Response';
 import axios from 'axios';
 
-const apiUrl =  import.meta.env.VITE_PROXY_URL;
-
 function Interface() {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
@@ -13,7 +11,7 @@ function Interface() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true
+    setLoading(true);
 
     if (imageFile) {
       // Handle image submission
@@ -21,34 +19,21 @@ function Interface() {
         const formData = new FormData();
         formData.append('user_image', imageFile);
 
-        const res = await axios.post(`${apiUrl}/api/v1/g/generate-vision`, formData);
-        if (!res.data || res.data.response.trim() === '') {
-          setResponse('Please provide more details of what you need.');
-        } else {
-          setResponse(res.data.response);
-        }
+        const res = await axios.post("/api/v1/g/generate-vision", formData);
+        setResponse(res.data.response);
       } catch (error) {
         console.error('Error generating images:', error);
       }
     } else {
       // Handle text submission
       try {
-        if (prompt.trim().length === 1) {
-          setResponse('Please provide more details of what you need.');
-          return;
-        }
-
-        const res = await axios.post(`${apiUrl}/api/v1/g/generate-text`, { prompt });
-        if (!res.data || res.data.text.trim() === '') {
-          setResponse('Please provide more details of what you need.');
-        } else {
-          setResponse(res.data.text);
-        }
+        const res = await axios.post("/api/v1/g/generate-text", { prompt });
+        setResponse(res.data.text);
       } catch (error) {
         console.error('Error generating text:', error);
       }
     }
-    setLoading(false); // Set loading state to false after submission
+    setLoading(false);
   };
 
   // Handle image input changes
