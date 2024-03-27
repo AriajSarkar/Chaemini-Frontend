@@ -28,7 +28,7 @@ To run this project locally, follow these steps:
 2. **Install dependencies**:
 
     ```bash
-    cd web
+    cd Chaemini-Frontend
     ```
     ```bash
     yarn install
