@@ -7,7 +7,6 @@ const apiUrl =  import.meta.env.VITE_PROXY_URL;
 
 function Interface() {
 
-  console.log(apiUrl)
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
