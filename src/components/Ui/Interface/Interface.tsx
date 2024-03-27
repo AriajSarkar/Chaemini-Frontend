@@ -3,6 +3,8 @@ import ImageInput from '../ImageInput/ImageInput';
 import Response from '../Response/Response';
 import axios from 'axios';
 
+const apiUrl =  import.meta.env.VITE_PROXY_URL;
+
 function Interface() {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
@@ -19,7 +21,7 @@ function Interface() {
         const formData = new FormData();
         formData.append('user_image', imageFile);
 
-        const res = await axios.post('/api/v1/g/generate-vision', formData);
+        const res = await axios.post(`${apiUrl}/api/v1/g/generate-vision`, formData);
         setResponse(res.data.response);
       } catch (error) {
         console.error('Error generating images:', error);
@@ -27,7 +29,7 @@ function Interface() {
     } else {
       // Handle text submission
       try {
-        const res = await axios.post('/api/v1/g/generate-text', { prompt });
+        const res = await axios.post(`${apiUrl}/api/v1/g/generate-text`, { prompt });
         setResponse(res.data.text);
       } catch (error) {
         console.error('Error generating text:', error);
