@@ -1,4 +1,5 @@
-import logo from '../../../assets/logo.png';
+
+
 
 interface ResponseProps {
   response: string;
@@ -7,9 +8,10 @@ interface ResponseProps {
 
 const ResponseComponent: React.FC<ResponseProps> = ({ response, loading }) => {
   return (
+
     <div className="flex flex-col gap-2">
-      <img src={logo} className='w-40' alt="" />
-      <h1 className="text-2xl cursor-pointer font-bold  text-white">Welcome To  Chaemini</h1>
+
+      <h1 className="text-2xl cursor-pointer font-bold  text-white">Welcome To  Chaemini AI</h1>
 
       <h2 className="text-lg font-semibold">Response:</h2>
       {loading ? (
