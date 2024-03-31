@@ -3,7 +3,7 @@ import ImageInput from '../ImageInput/ImageInput';
 import Response from '../Response/Response';
 import axios from 'axios';
 
-const apiUrl =  import.meta.env.VITE_PROXY_URL;
+const apiUrl = import.meta.env.VITE_PROXY_URL;
 
 function Interface() {
 
@@ -14,6 +14,10 @@ function Interface() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Clear the text area immediately after clicking the send button
+    setPrompt('');
+
     setLoading(true);
 
     if (imageFile) {
@@ -36,8 +40,10 @@ function Interface() {
         console.error('Error generating text:', error);
       }
     }
+
     setLoading(false);
   };
+
 
   // Handle image input changes
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,9 +60,9 @@ function Interface() {
         <form className="flex flex-row gap-3" onSubmit={handleSubmit}>
           <div className="relative flex-1">
             <div className="flex w-full items-center">
-           
+
               <div className={`overflow-hidden ${(!prompt && !imageFile) ? ' border-gray-600 border-token-border-xheavy shadow-[0_2px_6px_rgba(0,0,0,.05)]' : ''} flex flex-col w-full flex-grow relative border dark:text-white rounded-2xl bg-token-main-surface-primary border-token-border-medium`}>
-                
+
                 <textarea
                   id="prompt-textarea"
                   tabIndex={0}
